@@ -40,6 +40,17 @@ _ANDROID_ARCH=arch-arm
 _ANDROID_API=${_ANDROID_API:-"android-18"}
 # _ANDROID_API="android-19"
 
+
+#####################################################################
+
+if [ ! -z "${ANDROID_API_VERSION}" ]; then
+  _ANDROID_API=${ANDROID_API_VERSION}
+fi
+
+if [[ ! -z "${ANDROID_NDK_TOOLCHAIN_PREFIX}" && ! -z "${ANDROID_NDK_TOOLCHAIN_PREFIX}" ]]; then
+  _ANDROID_EABI="${ANDROID_NDK_TOOLCHAIN_PREFIX}-${ANDROID_NDK_TOOLCHAIN_VERSION}"
+fi
+
 #####################################################################
 
 # If the user did not specify the NDK location, try and pick it up.
