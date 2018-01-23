@@ -23,12 +23,14 @@ _ANDROID_NDK=${_ANDROID_NDK:-"android-ndk-r10"}
 # list in $ANDROID_NDK_ROOT/toolchains. This value is always used.
 # _ANDROID_EABI="x86-4.6"
 # _ANDROID_EABI="arm-linux-androideabi-4.6"
-_ANDROID_EABI="arm-linux-androideabi-4.8"
+#_ANDROID_EABI="arm-linux-androideabi-4.8"
+_ANDROID_EABI="aarch64-linux-android-4.8"
 
 # Set _ANDROID_ARCH to the architecture you are building for.
 # This value is always used.
 # _ANDROID_ARCH=arch-x86
 _ANDROID_ARCH=arch-arm
+#_ANDROID_ARCH=arch-arm64
 
 # Set _ANDROID_API to the API you want to use. You should set it
 # to one of: android-14, android-9, android-8, android-14, android-5
@@ -40,8 +42,11 @@ _ANDROID_ARCH=arch-arm
 _ANDROID_API=${_ANDROID_API:-"android-18"}
 # _ANDROID_API="android-19"
 
-
 #####################################################################
+
+if [ ! -z "${ANDROID_ARCH}" ]; then
+  _ANDROID_ARCH=${ANDROID_ARCH}
+fi
 
 if [ ! -z "${ANDROID_API_VERSION}" ]; then
   _ANDROID_API=${ANDROID_API_VERSION}
@@ -133,6 +138,9 @@ case $_ANDROID_ARCH in
 	arch-arm)	  
       ANDROID_TOOLS="arm-linux-androideabi-gcc arm-linux-androideabi-ranlib arm-linux-androideabi-ld"
 	  ;;
+  arch-arm64)	  
+      ANDROID_TOOLS="aarch64-linux-android-gcc aarch64-linux-android-ranlib aarch64-linux-android-ld"
+	  ;;
 	arch-x86)	  
       ANDROID_TOOLS="i686-linux-android-gcc i686-linux-android-ranlib i686-linux-android-ld"
 	  ;;	  
@@ -209,6 +217,14 @@ export RELEASE=2.6.37
 export SYSTEM=android
 export ARCH=arm
 export CROSS_COMPILE="arm-linux-androideabi-"
+
+if [ "$_ANDROID_ARCH" == "arch-arm64" ]; then
+	export MACHINE=arm64
+	export RELEASE=2.6.37
+	export SYSTEM=android
+	export ARCH=aarch64
+	export CROSS_COMPILE="aarch64-linux-android-"
+fi
 
 if [ "$_ANDROID_ARCH" == "arch-x86" ]; then
 	export MACHINE=i686
