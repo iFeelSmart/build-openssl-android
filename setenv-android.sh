@@ -219,7 +219,7 @@ export ARCH=arm
 export CROSS_COMPILE="arm-linux-androideabi-"
 
 if [ "$_ANDROID_ARCH" == "arch-arm64" ]; then
-	export MACHINE=arm64
+	export MACHINE=armv7
 	export RELEASE=2.6.37
 	export SYSTEM=android
 	export ARCH=aarch64
@@ -244,7 +244,7 @@ export ANDROID_API="$_ANDROID_API"
 
 # CROSS_COMPILE and ANDROID_DEV are DFW (Don't Fiddle With). Its used by OpenSSL build system.
 # export CROSS_COMPILE="arm-linux-androideabi-"
-export ANDROID_DEV="$ANDROID_NDK_ROOT/platforms/$_ANDROID_API/$_ANDROID_ARCH/usr"
+export ANDROID_DEV="$ANDROID_SYSROOT/usr"
 export HOSTCC=gcc
 
 VERBOSE=1
