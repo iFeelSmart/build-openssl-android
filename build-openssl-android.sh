@@ -26,7 +26,7 @@ if [ ! -e ${OPENSSL_TARBALL}.sha1 ]; then
 	echo -n "Verifying...	"
 	curl -o ${OPENSSL_TARBALL}.sha1 -s https://www.openssl.org/source/${OPENSSL_TARBALL}.sha1
 	CHECKSUM=`cat ${OPENSSL_TARBALL}.sha1`
-	ACTUAL=`shasum ${OPENSSL_TARBALL} | awk '{ print \$1 }'`
+	ACTUAL=`sha1sum ${OPENSSL_TARBALL} | awk '{ print \$1 }'`
 	if [ "x$ACTUAL" == "x$CHECKSUM" ]; then
 		echo "OK"
 	else
