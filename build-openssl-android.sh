@@ -21,12 +21,20 @@ if [ ! -e ${OPENSSL_TARBALL} ]; then
 	curl -# -O https://www.openssl.org/source/${OPENSSL_TARBALL}
 fi
 
+command_exists () {
+    type "$1" &> /dev/null ;
+}
+
 # Verify the source file
 if [ ! -e ${OPENSSL_TARBALL}.sha1 ]; then
 	echo -n "Verifying...	"
 	curl -o ${OPENSSL_TARBALL}.sha1 -s https://www.openssl.org/source/${OPENSSL_TARBALL}.sha1
 	CHECKSUM=`cat ${OPENSSL_TARBALL}.sha1`
-	ACTUAL=`sha1sum ${OPENSSL_TARBALL} | awk '{ print \$1 }'`
+	if command_exists shasum ; then
+    	ACTUAL=`shasum ${OPENSSL_TARBALL} | awk '{ print \$1 }'`
+	else
+		ACTUAL=`sha1sum ${OPENSSL_TARBALL} | awk '{ print \$1 }'`
+	fi
 	if [ "x$ACTUAL" == "x$CHECKSUM" ]; then
 		echo "OK"
 	else

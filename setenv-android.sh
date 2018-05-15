@@ -48,8 +48,8 @@ if [ ! -z "${ANDROID_ARCH}" ]; then
   _ANDROID_ARCH=${ANDROID_ARCH}
 fi
 
-if [ ! -z "${ANDROID_API_VERSION}" ]; then
-  _ANDROID_API=${ANDROID_API_VERSION}
+if [ ! -z "${ANDROID_API}" ]; then
+  _ANDROID_API=${ANDROID_API}
 fi
 
 if [[ ! -z "${ANDROID_NDK_TOOLCHAIN_PREFIX}" && ! -z "${ANDROID_NDK_TOOLCHAIN_PREFIX}" ]]; then
